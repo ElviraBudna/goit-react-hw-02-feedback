@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import Notification from 'components/Section/Notification';
-
+import { TextStatistics, Container } from './Statistics.styled';
 export default function Statistics({
   good,
   neutral,
@@ -10,16 +11,26 @@ export default function Statistics({
   return (
     <div>
       {total !== 0 ? (
-        <div>
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bad: {bad}</p>
-          <p>Total: {total}</p>
-          <p>Positive Feedback: {positivePercentage}%</p>
-        </div>
+        <Container>
+          <TextStatistics>Good: {good}</TextStatistics>
+          <TextStatistics>Neutral: {neutral}</TextStatistics>
+          <TextStatistics>Bad: {bad}</TextStatistics>
+          <TextStatistics>Total: {total}</TextStatistics>
+          <TextStatistics>
+            Positive Feedback: {positivePercentage}%
+          </TextStatistics>
+        </Container>
       ) : (
         <Notification message="There is no feedback" />
       )}
     </div>
   );
 }
+
+Statistics.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
+};

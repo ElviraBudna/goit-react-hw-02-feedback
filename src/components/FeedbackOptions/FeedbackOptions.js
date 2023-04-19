@@ -1,17 +1,28 @@
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import { FeedbackContainer, FeedbackButton } from './Feedback.styled';
 
 export default function FeedbackOptions({ options, onLeaveFeedback }) {
   return (
-    <div>
+    <FeedbackContainer>
       {options.map(option => (
-        <button
+        <FeedbackButton
           type="button"
           onClick={() => onLeaveFeedback(option.name)}
           key={(option.id = nanoid())}
         >
           {option.name}
-        </button>
+        </FeedbackButton>
       ))}
-    </div>
+    </FeedbackContainer>
   );
 }
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    })
+  ),
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
